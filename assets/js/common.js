@@ -5,6 +5,7 @@ function renderFooterExternal() {
   if (!el) return;
   var links = [
     { label: "Attendance & Recitation Tracker", href: ATTENDANCE_TRACKER_URL },
+    { label: "Class Discord", href: CLASS_DISCORD_URL },
     { label: "SC E-Library", href: "https://sc.judiciary.gov.ph" },
     { label: "Official Gazette", href: "https://www.officialgazette.gov.ph" },
   ];

@@ -42,12 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function buildEvents() {
   var events = [];
-  WEEKS.forEach(function (w) {
-    events.push({ date: w.date, title: (w.isExam ? "" : "Week " + w.id + " — ") + w.title, type: w.isExam ? "exam" : "class", bucket: w.isExam ? "exam" : "class" });
-    if (w.assignment && !w.isExam) {
-      events.push({ date: w.assignment.due, title: w.assignment.title + " (due)", type: "due", bucket: "due" });
-    }
-  });
+  if (WEEKS.length) {
+    WEEKS.forEach(function (w) {
+      events.push({ date: w.date, title: (w.isExam ? "" : "Week " + w.id + " — ") + w.title, type: w.isExam ? "exam" : "class", bucket: w.isExam ? "exam" : "class" });
+      if (w.assignment && !w.isExam) {
+        events.push({ date: w.assignment.due, title: w.assignment.title + " (due)", type: "due", bucket: "due" });
+      }
+    });
+  } else {
+    CLASS_SESSIONS.forEach(function (date) {
+      events.push({ date: date, title: "JDN727 class session — course details coming soon", type: "class", bucket: "class" });
+    });
+  }
   ACADEMIC_EVENTS.forEach(function (e) {
     events.push({ date: e.date, endDate: e.endDate, title: e.title, type: e.type, bucket: "academic" });
   });

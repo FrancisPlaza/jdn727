@@ -120,6 +120,8 @@ img, svg { display: block; }
   transition: background-color .15s;
 }
 .btn:hover { background: var(--secondary); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn:disabled:hover { background: var(--card); }
 .btn .icon-sm { width: 12px; height: 12px; }
 .btn-link {
   background: none; border: none; padding: 0; box-shadow: none;
@@ -400,6 +402,7 @@ table.syllabus .wk-assignment { font-size: 0.75rem; color: var(--rose-text); fon
 .footer-links a:hover, .footer-links button:hover { color: var(--foreground); }
 .footer-bottom { border-top: 1px solid var(--border); padding: 1.25rem 0; }
 .footer-disclaimer-lead { font-size: 0.75rem; color: rgba(61,41,82,0.8); margin-bottom: 0.4rem; }
+.footer-disclaimer-lead a { color: var(--primary); font-weight: 600; }
 .footer-disclaimer { font-size: 0.75rem; color: var(--muted-foreground); line-height: 1.7; }
 
 /* ─── Utility spacing ───────────────────────────────────────────── */

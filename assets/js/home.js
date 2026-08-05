@@ -8,12 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
 function renderHeroLinks() {
   var el = document.getElementById("heroLinks");
   var links = [
+    { label: "Zoom Class Meeting", iconName: "link2", disabled: true },
     { label: "Attendance & Recitation Tracker", iconName: "file-text", href: ATTENDANCE_TRACKER_URL, external: true },
-    { label: "Syllabus Status", iconName: "book-open", href: "course-info.html#syllabus" },
+    { label: "Class Discord", iconName: "link2", href: CLASS_DISCORD_URL, external: true },
+    { label: "Syllabus", iconName: "book-open", href: "course-info.html#syllabus" },
     { label: "Class Calendar", iconName: "calendar", href: "calendar.html" },
   ];
   el.innerHTML = links
     .map(function (l) {
+      if (l.disabled) {
+        return '<button class="btn" type="button" disabled>' + icon(l.iconName) + l.label + "</button>";
+      }
       var external = !!l.external;
       return (
         '<a class="btn" href="' + l.href + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : "") + ">" +
