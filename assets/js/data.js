@@ -42,10 +42,12 @@ const WEEKS = [];
 // Confirmed weekly class schedule for the launch version. Topics and readings
 // remain intentionally unset until the official syllabus is issued.
 const CLASS_SESSIONS = [
-  "2026-07-22", "2026-07-29", "2026-08-05", "2026-08-12", "2026-08-19", "2026-08-26",
-  "2026-09-02", "2026-09-09", "2026-09-16", "2026-09-23",
-  "2026-10-07", "2026-10-14", "2026-10-21", "2026-10-28",
-  "2026-11-04", "2026-11-11", "2026-11-18", "2026-11-25", "2026-12-02",
+  { date: "2026-08-05", title: "JDN727 class suspended", bucket: "suspension" },
+  { date: "2026-08-12" }, { date: "2026-08-19" }, { date: "2026-08-26" },
+  { date: "2026-09-02" }, { date: "2026-09-09" }, { date: "2026-09-16" }, { date: "2026-09-23" },
+  { date: "2026-10-07" }, { date: "2026-10-14" }, { date: "2026-10-21" }, { date: "2026-10-28" },
+  { date: "2026-11-04" }, { date: "2026-11-11" }, { date: "2026-11-18" }, { date: "2026-11-25" },
+  { date: "2026-12-02" },
 ];
 
 const ANNOUNCEMENTS = [

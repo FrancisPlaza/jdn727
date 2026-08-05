@@ -9,6 +9,7 @@ var MONTHS = [
 
 var EVENT_STYLE = {
   class: { color: "var(--lavender)", label: "Class Session" },
+  suspension: { color: "var(--amber-text)", label: "Class Suspended" },
   exam: { color: "var(--exam-dot)", label: "Examination" },
   due: { color: "#C87D8F", label: "Assignment Due" },
   academic: { color: "var(--muted-foreground)", label: "Academic Calendar" },
@@ -50,8 +51,13 @@ function buildEvents() {
       }
     });
   } else {
-    CLASS_SESSIONS.forEach(function (date) {
-      events.push({ date: date, title: "JDN727 class session — course details coming soon", type: "class", bucket: "class" });
+    CLASS_SESSIONS.forEach(function (session) {
+      events.push({
+        date: session.date,
+        title: session.title || "JDN727 class session — course details coming soon",
+        type: session.type || "class",
+        bucket: session.bucket || "class",
+      });
     });
   }
   ACADEMIC_EVENTS.forEach(function (e) {
