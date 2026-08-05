@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="desc">${escapeHTML(item.desc)}</p>
             <p class="scope">${escapeHTML(item.scope)}</p>
           </div>
-          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-link" style="white-space:nowrap;">View ${icon("external-link", "icon-sm")}</a>
+          <span class="btn-link" style="white-space:nowrap;">Links coming soon</span>
         </div>
       </div>`;
     }).join("");

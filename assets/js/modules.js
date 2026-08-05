@@ -46,6 +46,13 @@ function showDetail(id) {
 }
 
 function renderList() {
+  var mount = document.getElementById("weekListMount");
+  if (!WEEKS.length) {
+    document.querySelector(".controls-row").style.display = "none";
+    mount.innerHTML = '<div class="notice-callout">The official syllabus has not been issued yet. Weekly module topics, readings, cases, assignments, and assessments will appear here once the professor confirms them.</div>';
+    return;
+  }
+
   var filtered = WEEKS.filter(function (w) {
     var status = w.isExam ? "exam" : deriveStatus(w.date);
     var matchStatus = currentFilter === "all" || status === currentFilter || (w.isExam && deriveStatus(w.date) === currentFilter);
@@ -53,7 +60,6 @@ function renderList() {
     return matchStatus && matchSearch;
   });
 
-  var mount = document.getElementById("weekListMount");
   if (!filtered.length) {
     mount.innerHTML = '<p class="empty-note">No weeks match your filter.</p>';
     return;
@@ -140,7 +146,7 @@ function renderDetail(week) {
               <p class="case-gr">${escapeHTML(c.gr)}</p>
               <p class="case-topic">${escapeHTML(c.topic)}</p>
             </div>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="btn-link" style="white-space:nowrap;">Full text ${icon("external-link", "icon-sm")}</a>
+            <span class="btn-link" style="white-space:nowrap;">Full-text link coming soon</span>
           </div>`;
         }).join("")
       : "";

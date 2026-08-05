@@ -8,14 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
 function renderHeroLinks() {
   var el = document.getElementById("heroLinks");
   var links = [
-    { label: "Join Zoom Class", iconName: "link2", href: "#" },
-    { label: "Class Google Drive", iconName: "file-text", href: "#" },
-    { label: "View Syllabus", iconName: "book-open", href: "course-info.html#syllabus" },
+    { label: "Zoom Class Meeting", iconName: "link2", disabled: true },
+    { label: "Attendance & Recitation Tracker", iconName: "file-text", href: ATTENDANCE_TRACKER_URL, external: true },
+    { label: "Class Discord", iconName: "link2", href: CLASS_DISCORD_URL, external: true },
+    { label: "Syllabus", iconName: "book-open", href: "course-info.html#syllabus" },
     { label: "Class Calendar", iconName: "calendar", href: "calendar.html" },
   ];
   el.innerHTML = links
     .map(function (l) {
-      var external = l.href === "#";
+      if (l.disabled) {
+        return '<button class="btn" type="button" disabled>' + icon(l.iconName) + l.label + "</button>";
+      }
+      var external = !!l.external;
       return (
         '<a class="btn" href="' + l.href + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : "") + ">" +
         icon(l.iconName) + l.label + (external ? icon("external-link", "icon-sm") : "") +
@@ -34,6 +38,35 @@ function findCurrentWeek() {
 }
 
 function renderThisWeek() {
+  if (!WEEKS.length) {
+    document.getElementById("thisWeekMount").innerHTML = `
+      <div class="this-week">
+        <div class="this-week-head">
+          <div>
+            <span class="section-label" style="margin:0;">Course Hub Status</span>
+            <h3>Official course information is coming soon</h3>
+            <p style="font-size:0.875rem;color:var(--muted-foreground);margin-top:0.25rem;">The syllabus has not yet been released.</p>
+          </div>
+          <span class="badge badge-upcoming">${icon("clock")}Coming Soon</span>
+        </div>
+        <div class="this-week-body">
+          <div>
+            <p class="this-week-col-label">What to expect</p>
+            <p style="font-size:0.875rem;line-height:1.6;">Weekly topics, readings, cases, assignments, and assessments will appear here once confirmed by the professor.</p>
+          </div>
+          <div>
+            <p class="this-week-col-label">For now</p>
+            <p style="font-size:0.875rem;line-height:1.6;">Use the tracker and calendar links above for the section’s current administrative information.</p>
+          </div>
+          <div>
+            <p class="this-week-col-label">Questions</p>
+            <p style="font-size:0.875rem;line-height:1.6;">Please confirm course requirements against the professor’s announcements when they are issued.</p>
+          </div>
+        </div>
+      </div>`;
+    renderInlineIcons();
+    return;
+  }
   var week = findCurrentWeek();
   var status = deriveStatus(week.date);
   var codalList = week.codal.map(function (c) {
@@ -113,7 +146,7 @@ function renderDeadlines() {
 
   var mount = document.getElementById("deadlinesMount");
   if (!items.length) {
-    mount.innerHTML = '<p class="empty-note">No upcoming deadlines on the books right now.</p>';
+    mount.innerHTML = '<p class="empty-note">Course deadlines and examinations will be posted once the official syllabus is released.</p>';
     return;
   }
   mount.innerHTML = items

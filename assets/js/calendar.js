@@ -9,6 +9,7 @@ var MONTHS = [
 
 var EVENT_STYLE = {
   class: { color: "var(--lavender)", label: "Class Session" },
+  suspension: { color: "var(--amber-text)", label: "Class Suspended" },
   exam: { color: "var(--exam-dot)", label: "Examination" },
   due: { color: "#C87D8F", label: "Assignment Due" },
   academic: { color: "var(--muted-foreground)", label: "Academic Calendar" },
@@ -42,12 +43,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function buildEvents() {
   var events = [];
-  WEEKS.forEach(function (w) {
-    events.push({ date: w.date, title: (w.isExam ? "" : "Week " + w.id + " — ") + w.title, type: w.isExam ? "exam" : "class", bucket: w.isExam ? "exam" : "class" });
-    if (w.assignment && !w.isExam) {
-      events.push({ date: w.assignment.due, title: w.assignment.title + " (due)", type: "due", bucket: "due" });
-    }
-  });
+  if (WEEKS.length) {
+    WEEKS.forEach(function (w) {
+      events.push({ date: w.date, title: (w.isExam ? "" : "Week " + w.id + " — ") + w.title, type: w.isExam ? "exam" : "class", bucket: w.isExam ? "exam" : "class" });
+      if (w.assignment && !w.isExam) {
+        events.push({ date: w.assignment.due, title: w.assignment.title + " (due)", type: "due", bucket: "due" });
+      }
+    });
+  } else {
+    CLASS_SESSIONS.forEach(function (session) {
+      events.push({
+        date: session.date,
+        title: session.title || "JDN727 class session — course details coming soon",
+        type: session.type || "class",
+        bucket: session.bucket || "class",
+      });
+    });
+  }
   ACADEMIC_EVENTS.forEach(function (e) {
     events.push({ date: e.date, endDate: e.endDate, title: e.title, type: e.type, bucket: "academic" });
   });
@@ -55,7 +67,13 @@ function buildEvents() {
 }
 
 function renderLegend() {
-  document.getElementById("legendMount").innerHTML = Object.keys(EVENT_STYLE).map(function (key) {
+  var activeBuckets = ALL_EVENTS.reduce(function (buckets, event) {
+    buckets[event.bucket] = true;
+    return buckets;
+  }, {});
+  document.getElementById("legendMount").innerHTML = Object.keys(EVENT_STYLE).filter(function (key) {
+    return activeBuckets[key];
+  }).map(function (key) {
     var s = EVENT_STYLE[key];
     return `<span class="legend-item"><span class="legend-dot" style="background:${s.color};"></span>${s.label}</span>`;
   }).join("");

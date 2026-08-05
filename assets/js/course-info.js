@@ -1,18 +1,5 @@
-var GRADING = [
-  { label: "Class Participation / Recitation", pct: 20 },
-  { label: "Case Briefs (2 submissions)", pct: 20 },
-  { label: "Midterm Examination", pct: 30 },
-  { label: "Final Examination", pct: 30 },
-];
-
-var POLICIES = [
-  { title: "Attendance", body: "Regular attendance is expected. Under the SBCA Student Handbook, JDN727 (2 units) allows a maximum of 7 hours of absence before automatic dropping, excused or not. Three tardiness instances count as one absence. Being more than 15 minutes late may be recorded as absent at the professor's discretion." },
-  { title: "Class Participation / Recitation", body: "Cold-calling is the standard method of participation. Students must be prepared to recite on any assigned case or topic for the week. Recitation counts toward the class participation grade. Failing to recite when called, without prior notice to the beadle, is recorded as unprepared." },
-  { title: "Case Briefs", body: "Two (2) case briefs are required across the semester. Each must follow IRAC format (Issue, Rule, Application, Conclusion) and shall not exceed four (4) pages, double-spaced, 12-pt Times New Roman, 1-inch margins. Submit in hard copy at the start of class on the due date. No late submissions accepted." },
-  { title: "Examinations", body: "Both Midterm and Final examinations are closed-book. Bring a valid school ID. No admission after the first 15 minutes. Electronic devices are prohibited during examinations. Write legibly in blue or black ink." },
-  { title: "Academic Integrity", body: "Plagiarism or any form of academic dishonesty will result in a failing grade for that requirement and may warrant disciplinary proceedings. All submitted work must be original. Cite all sources; the citation style is your choice, applied consistently." },
-  { title: "Communication", body: "Official announcements are posted to this class hub and to the section group chat. Contact the class beadle for logistical concerns; route academic concerns to the professor directly or through office hours. Confirm any information here against what the professor communicates in class." },
-];
+var GRADING = [];
+var POLICIES = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   renderGrading();
@@ -34,6 +21,10 @@ function setTab(tab) {
 }
 
 function renderGrading() {
+  if (!GRADING.length) {
+    document.getElementById("gradingMount").innerHTML = '<div class="notice-callout" style="margin-bottom:0;">The grading breakdown will be posted once the official course requirements are released.</div>';
+    return;
+  }
   document.getElementById("gradingMount").innerHTML = GRADING.map(function (g) {
     return `
     <div class="grade-row">
@@ -44,6 +35,10 @@ function renderGrading() {
 }
 
 function renderSyllabusTable() {
+  if (!WEEKS.length) {
+    document.getElementById("syllabusTable").innerHTML = '<tbody><tr><td colspan="4" style="text-align:center;color:var(--muted-foreground);padding:2rem;">The official syllabus will appear here once it is released.</td></tr></tbody>';
+    return;
+  }
   var rows = WEEKS.map(function (w, i) {
     var rowClass = w.isExam ? "exam-row" : (i % 2 === 0 ? "odd" : "even");
     var readings = w.codal.concat(w.cases.map(function (c) { return c.name; }));
@@ -66,6 +61,10 @@ function renderSyllabusTable() {
 }
 
 function renderPolicies() {
+  if (!POLICIES.length) {
+    document.getElementById("policiesMount").innerHTML = '<div class="notice-callout" style="margin-bottom:0;">Official attendance, recitation, assessment, and communication policies will be posted here once confirmed by the professor.</div>';
+    return;
+  }
   document.getElementById("policiesMount").innerHTML = POLICIES.map(function (p) {
     return `<div class="policy-card card card-pad"><h3>${p.title}</h3><p>${p.body}</p></div>`;
   }).join("");
