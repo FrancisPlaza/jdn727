@@ -55,7 +55,13 @@ function buildEvents() {
 }
 
 function renderLegend() {
-  document.getElementById("legendMount").innerHTML = Object.keys(EVENT_STYLE).map(function (key) {
+  var activeBuckets = ALL_EVENTS.reduce(function (buckets, event) {
+    buckets[event.bucket] = true;
+    return buckets;
+  }, {});
+  document.getElementById("legendMount").innerHTML = Object.keys(EVENT_STYLE).filter(function (key) {
+    return activeBuckets[key];
+  }).map(function (key) {
     var s = EVENT_STYLE[key];
     return `<span class="legend-item"><span class="legend-dot" style="background:${s.color};"></span>${s.label}</span>`;
   }).join("");

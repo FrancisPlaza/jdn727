@@ -38,12 +38,12 @@ jdn727/
 ## Updating content week to week
 
 Everything lives in `assets/js/data.js`:
-- **`WEEKS`** — one entry per class session (topic, codal readings, textbook pages, cases, assignment). `status` is **not** stored — it's computed live from each week's date against the visitor's current date (`deriveStatus` in `data.js`), so the site stays accurate without manual edits.
+- **`WEEKS`** — one entry per class session (topic, codal readings, textbook pages, cases, assignment). It is intentionally empty until the official syllabus is issued. `status` is **not** stored — it is computed live from each week's date against the visitor's current date (`deriveStatus` in `data.js`) once syllabus data is added.
 - **`ANNOUNCEMENTS`** — pinned + archived notices.
 - **`ACADEMIC_EVENTS`** — First-Semester-only entries pulled from the official SBCA academic calendar ICS (`Other Documents/sbca-law-academic-calendar-2026-2027.ics` in the Law School workspace). Re-check this against the source ICS if the registrar issues an update.
 - **`RESOURCE_GROUPS`** — primary/secondary sources for the Resources page.
 
-No syllabus has been issued yet as of this build — every week's topic, reading list, and assignment is **placeholder content**, clearly flagged as such throughout the site. Replace it wholesale once the real syllabus arrives; keep the `date` fields (they're tied to the actual Wednesday class schedule and the real academic-calendar exam windows).
+No syllabus has been issued yet as of this build. The site intentionally shows clear “coming soon” states for weekly topics, readings, cases, assignments, grading, and policies rather than publishing fictional course requirements. Populate `WEEKS`, `GRADING`, and `POLICIES` once the professor confirms the official information.
 
 ## Local Development
 
@@ -72,7 +72,7 @@ Then enable GitHub Pages in the repository settings (Source: Deploy from branch 
 
 ## Disclaimer
 
-This is a student-run class resource maintained by the class beadle, not an official registrar record. All schedules, readings, assignments, and case citations are placeholder material pending the professor's actual syllabus, and are subject to change. Always confirm against the professor's own communications.
+This is a student-run class resource maintained by the class beadle, not an official registrar record. Course-specific information will be added as it is officially released and may change. Always confirm against the professor's own communications.
 
 ## License
 

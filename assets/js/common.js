@@ -4,8 +4,7 @@ function renderFooterExternal() {
   var el = document.getElementById("footerExternal");
   if (!el) return;
   var links = [
-    { label: "Zoom Class Meeting", href: "#" },
-    { label: "Class Google Drive", href: "#" },
+    { label: "Attendance & Recitation Tracker", href: ATTENDANCE_TRACKER_URL },
     { label: "SC E-Library", href: "https://sc.judiciary.gov.ph" },
     { label: "Official Gazette", href: "https://www.officialgazette.gov.ph" },
   ];

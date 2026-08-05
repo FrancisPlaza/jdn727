@@ -32,7 +32,9 @@ function renderArchive(search) {
   });
   var mount = document.getElementById("archiveMount");
   if (!filtered.length) {
-    mount.innerHTML = '<p class="empty-note">No announcements match your search.</p>';
+    mount.innerHTML = search
+      ? '<p class="empty-note">No announcements match your search.</p>'
+      : '<p class="empty-note">No archived announcements yet.</p>';
     return;
   }
   mount.innerHTML = filtered.map(function (a) {
